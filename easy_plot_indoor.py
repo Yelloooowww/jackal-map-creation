@@ -11,21 +11,24 @@ from pgm_writer import PGMWriter
 from yaml_writer import YamlWriter
 from gen_world_ca import JackalMap
 
-obstacle_map = [[0 for i in range(30)] for j in range(30)]
-total_obstacle_map = [[0 for i in range(265)] for j in range(520)]
-total_jackal_map = [[0 for i in range(265)] for j in range(520)]
-total_closest_wall = [[0 for i in range(265)] for j in range(520)]
-total_avg_visibility = [[0 for i in range(265)] for j in range(520)]
-total_dispersion = [[0 for i in range(265)] for j in range(520)]
-total_characteristic_dimension = [[0 for i in range(265)] for j in range(520)]
-
 load_obstacle_map = np.load("indoor_map.npy")
-for index_i in range(0,520,30): #520
-    for index_j in range(0,265,30): #265
+shape = load_obstacle_map.shape
+print("map size",shape)
+obstacle_map = [[0 for i in range(30)] for j in range(30)]
+total_obstacle_map = [[0 for i in range(shape[1])] for j in range(shape[0])]
+total_jackal_map = [[0 for i in range(shape[1])] for j in range(shape[0])]
+total_closest_wall = [[0 for i in range(shape[1])] for j in range(shape[0])]
+total_avg_visibility = [[0 for i in range(shape[1])] for j in range(shape[0])]
+total_dispersion = [[0 for i in range(shape[1])] for j in range(shape[0])]
+total_characteristic_dimension = [[0 for i in range(shape[1])] for j in range(shape[0])]
+
+
+for index_i in range(0,shape[0],30):
+    for index_j in range(0,shape[1],30):
 
         for i in range(30):
             for j in range(30):
-                if index_i+i<520 and index_j+j<265:
+                if index_i+i<shape[0] and index_j+j<shape[1]:
                     obstacle_map[i][j] = load_obstacle_map[index_i+i][index_j+j]
                 else:
                     obstacle_map[i][j] = 1
@@ -42,7 +45,7 @@ for index_i in range(0,520,30): #520
 
         for i in range(30):
             for j in range(30):
-                if index_i+i<520 and index_j+j<265:
+                if index_i+i<shape[0] and index_j+j<shape[1]:
                     total_obstacle_map[index_i+i][index_j+j] = obstacle_map[i][j]
                     total_jackal_map[index_i+i][index_j+j] = jackal_map[i][j]
                     total_closest_wall[index_i+i][index_j+j] = closest_wall[i][j]
