@@ -1,4 +1,22 @@
 # jackal-map-creation
+
+## Step 1 - read pointcloud from a `.ply` file
+
+Maybe you should make some modify about map resolution, map height, map width and the coordination of origin.
+
+`python3 read_ply.py`
+
+Then, it would generate a `.npy` file.
+
+## Step 2 - difficulty visualization
+
+`python easy_plot.py`
+
+![](archive/res_0.6/train_env_avg_visibility.png)
+
+
+
+
 This repo contains the code used to generate the dataset
 for the [Benchmarking Metric Ground Navigation](https://arxiv.org/pdf/2008.13315.pdf) paper and can be modified
 to generate new datasets for robots of different footprints.

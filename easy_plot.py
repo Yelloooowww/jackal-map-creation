@@ -11,7 +11,7 @@ from pgm_writer import PGMWriter
 from yaml_writer import YamlWriter
 from gen_world_ca import JackalMap
 
-load_obstacle_map = np.load("indoor_map.npy")
+load_obstacle_map = np.load("train_env_map_bit.npy")
 shape = load_obstacle_map.shape
 print("map size",shape)
 obstacle_map = [[0 for i in range(30)] for j in range(30)]
@@ -65,4 +65,4 @@ for i,item in enumerate([total_obstacle_map,total_jackal_map,total_closest_wall,
     barrr = ax.imshow(item,cmap=cmap_list[i], interpolation='nearest')
     ax.set_title(str_list[i])
     fig.colorbar(barrr, ax=ax, orientation='horizontal')
-    fig.savefig("indoor_"+str_list[i]+".png")
+    fig.savefig("train_env_"+str_list[i]+".png")
